@@ -1,1 +1,3 @@
 # Survival_Island_c
+
+#이거 쓰기...
