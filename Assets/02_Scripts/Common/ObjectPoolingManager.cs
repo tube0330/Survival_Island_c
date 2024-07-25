@@ -78,7 +78,8 @@ public class ObjectPoolingManager : MonoBehaviour
         {
             var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], EnemyGroup.transform);
             enemy.name = $"enemy_{i + 1}";
-            enemy.SetActive(false);
+            enemy.SetActive(true);
+            //true로 갈길까
             enemyPoolList.Add(enemy);
         }
     }

@@ -99,7 +99,7 @@ public class MonsterDamage : MonoBehaviour
         isDie = false;
         rb.isKinematic = false;
         col.enabled = true;
-        gameObject.tag = "SWAT";
+        gameObject.tag = "MONSTER";
         gameObject.SetActive(false);
     }
     void Update()

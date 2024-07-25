@@ -36,7 +36,7 @@ public class ZombieDamage : MonoBehaviour
     public void BoxColEnable()
     {
         boxCol.enabled = true;
-        meshRenderer.enabled = true;
+        meshRenderer.enabled = false;
     }
     public void BoxColDisable()
     {
@@ -113,7 +113,7 @@ public class ZombieDamage : MonoBehaviour
         isDie = false;
         rb.isKinematic = false;
         col.enabled = true;
-        gameObject.tag = "SWAT";
+        gameObject.tag = "ZOMBIE";
         gameObject.SetActive(false);
     }
     void Update()

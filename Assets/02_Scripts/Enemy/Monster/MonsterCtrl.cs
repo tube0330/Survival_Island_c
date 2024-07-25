@@ -30,8 +30,10 @@ public class MonsterCtrl : MonoBehaviour
     {
         if (damage.isDie || Player.GetComponent<FpsDamage>().isPlayerDie)
             return;
+
         float distance = Vector3.Distance(thisMonster.position, Player.position);
-        if(distance <= attackDist)
+        
+        if (distance <= attackDist)
         {
             //Debug.Log("공격");
             animator.SetBool("IsAttack", true);
@@ -41,7 +43,7 @@ public class MonsterCtrl : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(PlayerPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3.0f);
         }
-        else if(distance <= traceDist)
+        else if (distance <= traceDist)
         {
             //Debug.Log("추적");
             animator.SetBool("IsAttack", false);
