@@ -10,6 +10,8 @@ TagManager:
   - SKELETON
   - ATTACK_HITBOX
   - ENEMY
+  - Fire
+  - BARREL
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - SKELETON
   - ZOMBIE
   - MONSTER
-  - 
+  - BARREL
   - 
   - 
   - 
