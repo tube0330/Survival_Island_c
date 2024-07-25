@@ -1575,35 +1575,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444093775}
-  - component: {fileID: 444093774}
+  - component: {fileID: 444093776}
+  - component: {fileID: 444093777}
   m_Layer: 0
-  m_Name: ObjPooling_Manager
+  m_Name: ObjectPoolingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &444093774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444093773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f0e55e02347cb4a9d5a403046c44dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8779721220767531614, guid: 3a17bb118c4dbc74da1004161df0b171, type: 3}
-  maxBulletPool: 10
-  bulletPoolList: []
-  EnemyPrefabs:
-  - {fileID: 577869556192468156, guid: 18e4bef85751c6541afd7bec46c56338, type: 3}
-  - {fileID: 6141335779995469753, guid: 9ebbb44267380b2438744bcdedea20ac, type: 3}
-  - {fileID: 4693411413228577717, guid: d0718e751ebc6e44c8f2c817dd982852, type: 3}
-  Points: []
-  enemyPoolList: []
 --- !u!4 &444093775
 Transform:
   m_ObjectHideFlags: 0
@@ -1619,6 +1599,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444093776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444093773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f0e55e02347cb4a9d5a403046c44dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8779721220767531614, guid: 3a17bb118c4dbc74da1004161df0b171, type: 3}
+  maxBulletPool: 10
+  bulletPoolList: []
+  EnemyPrefabs: []
+  maxEnemyPool: 10
+  enemyPoolList: []
+--- !u!114 &444093777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444093773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8a31261c6e7674fbac4f2171f2c07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  maxBulletPool: 10
+  bulletPoolList: []
+  enemyPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyPoolList: []
+  SpawnPointList: []
 --- !u!1 &454338727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,7 +2881,7 @@ MonoBehaviour:
   bulletUIimage: {fileID: 0}
   bulletUItext: {fileID: 0}
   fireTime: 0
-  handCtrl: {fileID: 703897540}
+  C_hc: {fileID: 0}
   isReload: 0
 --- !u!114 &703897550
 MonoBehaviour:
@@ -2898,10 +2917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6008dff5fbe737409382300c84d4467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpBar: {fileID: 54478606}
-  HpText: {fileID: 1341354071}
-  hp: 0
-  maxHp: 100
+  HPBar: {fileID: 0}
+  HPText: {fileID: 0}
+  HP: 0
+  maxHP: 100
   attackTag: ATTACK_HITBOX
   isPlayerDie: 0
   ScreenImage: {fileID: 0}
@@ -6307,8 +6326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca21361388751b49b59427ac327f3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killText: {fileID: 1270981790}
+  Points: []
   canvasGroup: {fileID: 0}
+  killText: {fileID: 1270981790}
   isPaused: 0
 --- !u!4 &1738853688
 Transform:

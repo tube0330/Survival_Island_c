@@ -76,7 +76,7 @@ public class SkeletonDamage : MonoBehaviour
         IsDie = true;
         //Destroy(gameObject, 5.0f);
         GetComponent<EnemyOnDisable>().Disable();
-        GameManager.Instance.KillScore(1);
+        GameManager.G_Instance.KillScore(1);
     }
     public void HitInfo(Collision col)
     {

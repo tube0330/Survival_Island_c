@@ -90,7 +90,7 @@ public class MonsterDamage : MonoBehaviour
         IsDie = true;
         //Destroy(gameObject, 5.0f);
         GetComponent<EnemyOnDisable>().Disable();
-        GameManager.Instance.KillScore(1);
+        GameManager.G_Instance.KillScore(1);
     }
     void Update()
     {

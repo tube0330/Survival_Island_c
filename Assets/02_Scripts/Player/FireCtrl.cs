@@ -17,13 +17,13 @@ public class FireCtrl : MonoBehaviour
 
     [Header("Variations")]
     public float fireTime;
-    public HandCtrl handCtrl;
+    public HandCtrl C_hc;
     private int BulletCount = 0;
     private int maxBulletCount = 10;
     public bool isReload = false;
     void Start()
     {
-        handCtrl = this.gameObject.GetComponent<HandCtrl>();
+        C_hc = this.gameObject.GetComponent<HandCtrl>();
         fireTime = Time.time;
         //현재 시간을 대입
         muzzleFlash.Stop();
@@ -42,32 +42,33 @@ public class FireCtrl : MonoBehaviour
         #endregion
         #region 연발
         //현재 시간에서 과거 시간을 빼서 0.1초 이상일때, 발사 후 firetime을 현재 시간에 대입
-        if ((Input.GetMouseButton(0)) && (Time.time - fireTime > 0.1f) && (!handCtrl.isRun) && (!isReload))
+        if ((Input.GetMouseButtonDown(0)) && (!C_hc.isRun) && (!isReload))
         {
             Fire();
             fireTime = Time.time;
         }
         #endregion
-        if (Input.GetMouseButtonUp(0) || (handCtrl.isRun) || (isReload)) //대신 Invoke(,)를 써도됨 [일정 간격마다 실행]
-        {
-            muzzleFlash.Stop();
-        }
     }
 
     void Fire()     //총알 발사 함수
     {
         BulletCount--;
+        
         Source.PlayOneShot(fireClip, 1.0f);
         fireAni.Play("fire");
+
         muzzleFlash.Play();
+        Invoke("MuzzleFlashDisable", 0.03f);
+
         UpdateBulletCountUI();
+
         if(BulletCount <= 0)
         {
             // Start Co Routine : 게임 중 개발자가 원하는 프레임을
             //                    만드려고 할 때 사용
             StartCoroutine(Reload());   // Reload() 호출
         }
-        var bullets = ObjPooling_Manager.instance.GetBulletPool();
+        var bullets = ObjectPoolingManager.poolingManager.GetBulletPool();
         if (bullets != null)
         {
             bullets.transform.position = firePos.position;
@@ -78,8 +79,7 @@ public class FireCtrl : MonoBehaviour
     IEnumerator Reload()
     {
         isReload = true;
-        yield return new WaitForSeconds(0.2f);  // 0.2초 대기
-        fireAni.Play("pump3");                  // Reload 애니메이션 재생
+        fireAni.Play("pump3");                  // Reload 애니메이션 
         yield return new WaitForSeconds(0.7f);    // n초 대기
         BulletCount = maxBulletCount;
         UpdateBulletCountUI();
@@ -89,5 +89,10 @@ public class FireCtrl : MonoBehaviour
     {
         bulletUIimage.fillAmount = (float)BulletCount / (float)maxBulletCount;
         bulletUItext.text = string.Format($"<color=#FFAAAA>{BulletCount}</color> / {maxBulletCount}");
+    }
+
+    void MuzzleFlashDisable()
+    {
+        muzzleFlash.Stop();
     }
 }

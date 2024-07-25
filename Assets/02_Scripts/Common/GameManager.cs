@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager G_Instance;
     public Transform[] Points;
     public CanvasGroup canvasGroup;
     public Text killText;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Instance = this;
+        G_Instance = this;
         //객체 생성. 게임매니저의 public이라고 선언된 변수나 메서드는 다른 스크립트에서 접근 가능
         //Points = GameObject.Find("SpawnPoints").GetComponentsInChildren<Transform>();
         canvasGroup = GameObject.Find("Inventory").GetComponent<CanvasGroup>();
@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        EnemySpawn();
-
         if (Input.GetKeyDown(KeyCode.Escape))
             GamePause();
 
@@ -83,28 +81,6 @@ public class GameManager : MonoBehaviour
         canvasGroup.alpha = isOpened ? 1.0f : 0.0f;
         canvasGroup.interactable = isOpened ? true : false;
         canvasGroup.blocksRaycasts = isOpened ? true : false;
-    }
-
-    void EnemySpawn()
-    {
-        timePreV += Time.deltaTime;
-
-        if (timePreV >= 3.0f)
-        {
-            Debug.Log("스폰");
-
-            var enemy = ObjPooling_Manager.instance.GetEnemyPool();
-
-            if (enemy != null)
-            {
-                int pos = Random.Range(1, Points.Length);
-                enemy.transform.position = Points[pos].position;
-                enemy.SetActive(true);
-            }
-
-            timePreV = Time.deltaTime;
-        }
-
     }
 
     public void KillScore(int score)
