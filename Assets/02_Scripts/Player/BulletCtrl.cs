@@ -4,14 +4,36 @@ using UnityEngine;
 
 public class BulletCtrl : MonoBehaviour
 {
-    public float speed = 1500f;
-    public Rigidbody rb;
-    public int damage = 20;
-    
-    void Start()
-    {
-        rb.AddForce(transform.forward * speed);
+    [SerializeField] Transform tr;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] TrailRenderer trailRenderer;
+    [SerializeField] float speed = 1000f;    //1500f;
 
-        Destroy(gameObject, 3.0f);
+    public int damage = 25;
+
+    void Awake()
+    {
+        tr = transform;
+        rb = GetComponent<Rigidbody>();
+        trailRenderer = GetComponent<TrailRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        Invoke("BulletDisable", 2.0f);
+        rb.AddForce(tr.forward * speed);
+    }
+
+    void BulletDisable()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        trailRenderer.Clear();
+        tr.position = Vector3.zero;
+        tr.rotation = Quaternion.identity;
+        rb.Sleep();
     }
 }

@@ -13,16 +13,16 @@ public class ObjectPoolingManager : MonoBehaviour
     public GameObject[] enemyPrefabs; // Changed to array
     private int maxEnemyPool = 10;
     public List<GameObject> enemyPoolList;
-    
     public List<Transform> SpawnPointList;
 
     void Awake()
     {
         if (poolingManager == null)
             poolingManager = GetComponent<ObjectPoolingManager>();
+
         else if (poolingManager != this)
             Destroy(gameObject);
-        
+
         DontDestroyOnLoad(gameObject);
 
         bulletPrefab = Resources.Load("Bullet") as GameObject;
@@ -31,26 +31,21 @@ public class ObjectPoolingManager : MonoBehaviour
         enemyPrefabs[1] = Resources.Load<GameObject>("Skeleton");
         enemyPrefabs[2] = Resources.Load<GameObject>("Zombie");
 
-        CreateBulletPool();
-        CreateEnemyPool();
+        CreateBullet();
+        CreateEnemy();
     }
 
     private void Start()
     {
-         var SpawnPoint = GameObject.Find("SpawnPoints");
+        var SpawnPoint = GameObject.Find("SpawnPoints");
 
         if (SpawnPoint != null)
             SpawnPoint.GetComponentsInChildren<Transform>(SpawnPointList);
 
         SpawnPointList.RemoveAt(0);
-
-        if (SpawnPointList.Count > 0)
-        {
-            StartCoroutine(CreateEnemy());
-        }   
     }
 
-    void CreateBulletPool()
+    void CreateBullet()
     {
         GameObject playerBulletGroup = new GameObject("PlayerBulletGroup");
 
@@ -64,24 +59,11 @@ public class ObjectPoolingManager : MonoBehaviour
         }
     }
 
-    private void CreateEnemyPool()
-    {
-        GameObject EnemyGroup = new GameObject("EnemyGroup");
-
-        for (int i = 0; i < 10; i++)
-        {
-            var enemyObj = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], EnemyGroup.transform);
-            enemyObj.name = $"enemy_{i+1}";
-            enemyObj.SetActive(false);
-            enemyPoolList.Add(enemyObj);
-        }
-    }
-
     public GameObject GetBulletPool()
     {
         for (int i = 0; i < bulletPoolList.Count; i++)
         {
-            if (!bulletPoolList[i].activeSelf)
+            if (bulletPoolList[i] != null && !bulletPoolList[i].activeSelf)
             {
                 return bulletPoolList[i];
             }
@@ -89,17 +71,28 @@ public class ObjectPoolingManager : MonoBehaviour
         return null;
     }
 
-    IEnumerator CreateEnemy()
+    void CreateEnemy()
     {
-        yield return new WaitForSeconds(3f);
-        
         GameObject EnemyGroup = new GameObject("EnemyGroup");
         for (int i = 0; i < maxEnemyPool; i++)
         {
             var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], EnemyGroup.transform);
-            enemy.name = $"enemy_{i+1}";
+            enemy.name = $"enemy_{i + 1}";
             enemy.SetActive(false);
             enemyPoolList.Add(enemy);
         }
     }
+
+    public GameObject GetEnemyPool()
+    {
+        for (int i = 0; i < enemyPoolList.Count; i++)
+        {
+            if (!enemyPoolList[i].activeSelf)
+            {
+                return enemyPoolList[i];
+            }
+        }
+        return null;
+    }
+
 }

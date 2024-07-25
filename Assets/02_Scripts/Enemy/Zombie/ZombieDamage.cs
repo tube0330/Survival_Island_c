@@ -7,7 +7,7 @@ public class ZombieDamage : MonoBehaviour
 {
     [Header("Component")]
     public Rigidbody rb;
-    public CapsuleCollider capCol;
+    public CapsuleCollider col;
     public Animator animator;
     public GameObject bloodEffect;      // 너무 빈번하게 실행시킬거면 파티클로 직접 쓰는게 나음
     public BoxCollider boxCol;
@@ -18,7 +18,7 @@ public class ZombieDamage : MonoBehaviour
     public string hitStr = "HitTrigger";
     public string dieStr = "DieTrigger";
     //public int hitCount = 0;
-    public bool IsDie = false;
+    public bool isDie = false;
     [Header("UI")]
     public Image hpBar;
     public Text hpText;
@@ -28,7 +28,7 @@ public class ZombieDamage : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        capCol = GetComponent<CapsuleCollider>();
+        col = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         hpInit = maxHp;
         hpBar.color = Color.green;
@@ -98,12 +98,23 @@ public class ZombieDamage : MonoBehaviour
     void ZombieDie()
     {
         animator.SetTrigger(dieStr);
-        capCol.enabled = false;     //콜라이더[충돌감지 기능] 비활성화
+        col.enabled = false;     //콜라이더[충돌감지 기능] 비활성화
         rb.isKinematic = true;      //물리기능 true일때 일시 제거
-        IsDie = true;
+        isDie = true;
         //Destroy(gameObject, 5.0f);
-        GetComponent<EnemyOnDisable>().Disable();
         GameManager.G_Instance.KillScore(1);
+    StartCoroutine(ObjectPoolPush());
+    }
+
+    IEnumerator ObjectPoolPush()
+    {
+        yield return new WaitForSeconds(3f);
+
+        isDie = false;
+        rb.isKinematic = false;
+        col.enabled = true;
+        gameObject.tag = "SWAT";
+        gameObject.SetActive(false);
     }
     void Update()
     {

@@ -7,7 +7,7 @@ public class MonsterDamage : MonoBehaviour
 {
     [Header("Component")]
     public Rigidbody rb;
-    public CapsuleCollider capCol;
+    public CapsuleCollider col;
     public Animator animator;
     public GameObject bloodEffect;
     public BoxCollider boxCol;
@@ -18,7 +18,7 @@ public class MonsterDamage : MonoBehaviour
     public string hitStr = "HitTrigger";
     public string dieStr = "DieTrigger";
     //public int hitCount = 0;
-    public bool IsDie = false;
+    public bool isDie = false;
     [Header("UI")]
     public Image hpBar;
     public Text hpText;
@@ -28,7 +28,7 @@ public class MonsterDamage : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        capCol = GetComponent<CapsuleCollider>();
+        col = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         hpInit = maxHp;
         hpBar.color = Color.green;
@@ -36,7 +36,7 @@ public class MonsterDamage : MonoBehaviour
     public void BoxColEnable()
     {
         boxCol.enabled = true;
-        meshRenderer.enabled = true;
+        meshRenderer.enabled = false;
     }
     public void BoxColDisable()
     {
@@ -85,12 +85,22 @@ public class MonsterDamage : MonoBehaviour
     public void MonsterDie()
     {
         animator.SetTrigger(dieStr);
-        capCol.enabled = false;
+        col.enabled = false;
         rb.isKinematic = true;
-        IsDie = true;
+        isDie = true;
         //Destroy(gameObject, 5.0f);
-        GetComponent<EnemyOnDisable>().Disable();
-        GameManager.G_Instance.KillScore(1);
+        GameManager.G_Instance.KillScore(1);StartCoroutine(ObjectPoolPush());
+    }
+
+    IEnumerator ObjectPoolPush()
+    {
+        yield return new WaitForSeconds(3f);
+
+        isDie = false;
+        rb.isKinematic = false;
+        col.enabled = true;
+        gameObject.tag = "SWAT";
+        gameObject.SetActive(false);
     }
     void Update()
     {

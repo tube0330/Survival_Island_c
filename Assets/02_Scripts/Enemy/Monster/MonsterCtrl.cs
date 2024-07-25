@@ -28,7 +28,7 @@ public class MonsterCtrl : MonoBehaviour
 
     void Update()
     {
-        if (damage.IsDie || Player.GetComponent<FpsDamage>().isPlayerDie)
+        if (damage.isDie || Player.GetComponent<FpsDamage>().isPlayerDie)
             return;
         float distance = Vector3.Distance(thisMonster.position, Player.position);
         if(distance <= attackDist)

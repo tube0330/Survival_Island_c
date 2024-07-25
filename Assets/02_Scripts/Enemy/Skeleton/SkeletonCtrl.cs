@@ -42,7 +42,7 @@ public class SkeletonCtrl : MonoBehaviour
 
     void Update()
     {
-        if (damage.IsDie || player.GetComponent<FpsDamage>().isPlayerDie)
+        if (damage.isDie || player.GetComponent<FpsDamage>().isPlayerDie)
             return;
         float distance = Vector3.Distance(thisSkeleton.position, player.position);
         if (distance <= attackDist)

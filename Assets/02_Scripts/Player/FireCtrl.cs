@@ -12,8 +12,8 @@ public class FireCtrl : MonoBehaviour
     public AudioSource Source;
     public AudioClip fireClip;
     public ParticleSystem muzzleFlash;  //가져온 이펙트 이름을 변수 이름으로 한것
-    [SerializeField]private Image bulletUIimage;
-    [SerializeField]private Text bulletUItext;
+    [SerializeField] private Image bulletUIimage;
+    [SerializeField] private Text bulletUItext;
 
     [Header("Variations")]
     public float fireTime;
@@ -42,7 +42,7 @@ public class FireCtrl : MonoBehaviour
         #endregion
         #region 연발
         //현재 시간에서 과거 시간을 빼서 0.1초 이상일때, 발사 후 firetime을 현재 시간에 대입
-        if ((Input.GetMouseButtonDown(0)) && (!C_hc.isRun) && (!isReload))
+        if (Input.GetMouseButtonDown(0) && (!C_hc.isRun) && (!isReload))
         {
             Fire();
             fireTime = Time.time;
@@ -53,7 +53,7 @@ public class FireCtrl : MonoBehaviour
     void Fire()     //총알 발사 함수
     {
         BulletCount--;
-        
+
         Source.PlayOneShot(fireClip, 1.0f);
         fireAni.Play("fire");
 
@@ -62,13 +62,14 @@ public class FireCtrl : MonoBehaviour
 
         UpdateBulletCountUI();
 
-        if(BulletCount <= 0)
+        if (BulletCount <= 0)
         {
             // Start Co Routine : 게임 중 개발자가 원하는 프레임을
             //                    만드려고 할 때 사용
             StartCoroutine(Reload());   // Reload() 호출
         }
         var bullets = ObjectPoolingManager.poolingManager.GetBulletPool();
+        
         if (bullets != null)
         {
             bullets.transform.position = firePos.position;

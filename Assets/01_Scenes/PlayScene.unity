@@ -1575,7 +1575,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 444093775}
-  - component: {fileID: 444093776}
   - component: {fileID: 444093777}
   m_Layer: 0
   m_Name: ObjectPoolingManager
@@ -1599,24 +1598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &444093776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444093773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f0e55e02347cb4a9d5a403046c44dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8779721220767531614, guid: 3a17bb118c4dbc74da1004161df0b171, type: 3}
-  maxBulletPool: 10
-  bulletPoolList: []
-  EnemyPrefabs: []
-  maxEnemyPool: 10
-  enemyPoolList: []
 --- !u!114 &444093777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1632,10 +1613,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   maxBulletPool: 10
   bulletPoolList: []
-  enemyPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemyPrefabs: []
   enemyPoolList: []
   SpawnPointList: []
 --- !u!1 &454338727
@@ -2917,8 +2895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6008dff5fbe737409382300c84d4467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPBar: {fileID: 0}
-  HPText: {fileID: 0}
+  HPBar: {fileID: 54478606}
+  HPText: {fileID: 1341354071}
   HP: 0
   maxHP: 100
   attackTag: ATTACK_HITBOX

@@ -7,7 +7,7 @@ public class SkeletonDamage : MonoBehaviour
 {
     [Header("Components")]
     public Rigidbody rb;
-    public CapsuleCollider capCol;
+    public CapsuleCollider col;
     public Animator animator;
     public GameObject bloodEffect;
     public BoxCollider boxCol;
@@ -17,7 +17,7 @@ public class SkeletonDamage : MonoBehaviour
     public string bulletTag = "BULLET";
     public string hitStr = "HitTrigger";
     public string dieStr = "DieTrigger";
-    public bool IsDie = false;
+    public bool isDie = false;
     [Header("UI")]
     public Image hpBar;
     public Text hpText;
@@ -28,7 +28,7 @@ public class SkeletonDamage : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        capCol = GetComponent<CapsuleCollider>();
+        col = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         hpInit = maxHp;
         firectrl = GameObject.FindWithTag("Player").GetComponent<FireCtrl>();
@@ -37,7 +37,7 @@ public class SkeletonDamage : MonoBehaviour
     void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
-        capCol = GetComponent<CapsuleCollider>();
+        col = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
         hpInit = maxHp;
         firectrl = GameObject.FindWithTag("Player").GetComponent<FireCtrl>();
@@ -71,12 +71,22 @@ public class SkeletonDamage : MonoBehaviour
     public void SkeletonDie()
     {
         animator.SetTrigger(dieStr);
-        capCol.enabled = false;
+        col.enabled = false;
         rb.isKinematic = true;
-        IsDie = true;
+        isDie = true;
         //Destroy(gameObject, 5.0f);
-        GetComponent<EnemyOnDisable>().Disable();
+        StartCoroutine(ObjectPoolPush());
         GameManager.G_Instance.KillScore(1);
+    }
+    IEnumerator ObjectPoolPush()
+    {
+        yield return new WaitForSeconds(3f);
+
+        isDie = false;
+        rb.isKinematic = false;
+        col.enabled = true;
+        gameObject.tag = "SWAT";
+        gameObject.SetActive(false);
     }
     public void HitInfo(Collision col)
     {
