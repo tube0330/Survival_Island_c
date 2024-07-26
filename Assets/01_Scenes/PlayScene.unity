@@ -2460,8 +2460,9 @@ GameObject:
   - component: {fileID: 679458436}
   - component: {fileID: 679458435}
   - component: {fileID: 679458438}
+  - component: {fileID: 679458439}
   m_Layer: 5
-  m_Name: Item (1)
+  m_Name: Shock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2549,6 +2550,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &679458439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679458433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbca45f9e400a347b712890b7e40905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  C_item:
+    itemtype: 0
+    itemcal: 0
+    name: 
+    detail: 
+    value: 0
 --- !u!1 &688688989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,8 +3215,9 @@ GameObject:
   - component: {fileID: 762347924}
   - component: {fileID: 762347923}
   - component: {fileID: 762347926}
+  - component: {fileID: 762347927}
   m_Layer: 5
-  m_Name: Item (3)
+  m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3285,6 +3305,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &762347927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762347921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbca45f9e400a347b712890b7e40905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  C_item:
+    itemtype: 0
+    itemcal: 0
+    name: 
+    detail: 
+    value: 0
 --- !u!1 &780230736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,7 +3661,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3579174896150670715, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4121,6 +4160,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4202,6 +4242,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612d3611317e8e94d939bc71a4721fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PosCamera: {x: 0, y: 0, z: 0}
+  RotCamera: {x: 0, y: 0, z: 0, w: 0}
+  shakeTime: 0
+  isShake: 0
 --- !u!1001 &972602956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5311,8 +5367,9 @@ GameObject:
   - component: {fileID: 1276234647}
   - component: {fileID: 1276234646}
   - component: {fileID: 1276234649}
+  - component: {fileID: 1276234650}
   m_Layer: 5
-  m_Name: Item (2)
+  m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5400,6 +5457,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1276234650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276234644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbca45f9e400a347b712890b7e40905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  C_item:
+    itemtype: 0
+    itemcal: 0
+    name: 
+    detail: 
+    value: 0
 --- !u!1 &1276624665
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,7 +6007,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3579174896150670715, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6463,7 +6539,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3579174896150670715, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6483,6 +6560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1738853688}
   - component: {fileID: 1738853687}
+  - component: {fileID: 1738853689}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6502,9 +6580,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca21361388751b49b59427ac327f3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: []
   canvasGroup: {fileID: 0}
   killText: {fileID: 1270981790}
+  dataManager: {fileID: 0}
+  gameData:
+    equipItem: []
+    killcnt: 0
+    HP: 120
+    damage: 25
+    speed: 6
+  slotList: {fileID: 1218319317}
+  itemObjects: []
   isPaused: 0
 --- !u!4 &1738853688
 Transform:
@@ -6521,6 +6607,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738853689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738853686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40a04c599f34154da6e2d63aa21f19c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataPath: 
 --- !u!1001 &1759373257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7033,8 +7132,9 @@ GameObject:
   - component: {fileID: 1904945231}
   - component: {fileID: 1904945233}
   - component: {fileID: 1904945234}
+  - component: {fileID: 1904945235}
   m_Layer: 5
-  m_Name: Item
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7122,6 +7222,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1904945235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904945229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbca45f9e400a347b712890b7e40905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  C_item:
+    itemtype: 0
+    itemcal: 0
+    name: 
+    detail: 
+    value: 0
 --- !u!1001 &1916529546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7178,7 +7296,8 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3579174896150670715, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7929,11 +8048,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3173756345560601281, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3579174896150670715, guid: 906c772c5551b7b4b8ed8315090ad827, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

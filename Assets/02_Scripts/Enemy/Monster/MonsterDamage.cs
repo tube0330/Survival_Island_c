@@ -56,7 +56,9 @@ public class MonsterDamage : MonoBehaviour
             hpBar.fillAmount = (float)hpInit / (float)maxHp;
             hpText.text = $"HP : <color=#FF0000>{hpInit.ToString()}</color>";
             if (hpInit <= 0)
+            {
                 MonsterDie();
+            }
         }
     }
     private void HitInfo(Collision col)
@@ -89,12 +91,14 @@ public class MonsterDamage : MonoBehaviour
         rb.isKinematic = true;
         isDie = true;
         //Destroy(gameObject, 5.0f);
-        GameManager.G_Instance.KillScore(1);StartCoroutine(ObjectPoolPush());
+        GameManager.G_Instance.KillScore(1); StartCoroutine(ObjectPoolPush());
     }
 
     IEnumerator ObjectPoolPush()
     {
         yield return new WaitForSeconds(3f);
+        hpInit = maxHp;
+        hpBar.fillAmount = 1;
 
         isDie = false;
         rb.isKinematic = false;

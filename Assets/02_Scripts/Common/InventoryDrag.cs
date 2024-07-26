@@ -10,7 +10,7 @@ public class InventoryDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     private Transform itemTr;
     private CanvasGroup canvasGroup;
     public static GameObject draggingItem = null;
-    
+
 
     void Start()
     {
@@ -37,7 +37,10 @@ public class InventoryDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         draggingItem = null;                        // 드래그 중인 아이템을 초기화
         canvasGroup.blocksRaycasts = true;
         if (itemTr.parent == inventoryTr)
+        {
             itemTr.SetParent(itemListTr);
+            GameManager.G_Instance.RemoveItem(GetComponent<itemInfo>().C_item);
+        }
         this.transform.localPosition = Vector3.zero;
     }
 }

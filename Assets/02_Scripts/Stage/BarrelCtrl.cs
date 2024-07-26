@@ -10,9 +10,11 @@ public class BarrelCtrl : MonoBehaviour
     [SerializeField] GameObject ExplosionEff;
     [SerializeField] Rigidbody rb;
     [SerializeField] int hitCnt = 0;
+    [SerializeField] CameraShake camshake;
 
     void Start()
     {
+        camshake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
         meshes = GetComponent<MeshRenderer>();
         textures = Resources.LoadAll<Texture>("BarrelTextures");
         meshes.material.mainTexture = textures[Random.Range(0, textures.Length)];
@@ -44,10 +46,11 @@ public class BarrelCtrl : MonoBehaviour
 
     void ExplosionBarrel()
     {
+        camshake.isShake = true;
         GameObject eff = Instantiate(ExplosionEff, tr.position, Quaternion.identity);
         Destroy(eff, 2.0f);
 
-        Collider[] cols = Physics.OverlapSphere(tr.position, 20f, 1 << 9);
+        Collider[] cols = Physics.OverlapSphere(tr.position, 20f, 1 << 9 | 1 << 6 | 1 << 7 | 1 << 8);
         foreach (Collider col in cols)
         {
             Rigidbody rb = col.GetComponent<Rigidbody>();
@@ -56,7 +59,11 @@ public class BarrelCtrl : MonoBehaviour
             {
                 rb.mass = 1.0f;
                 rb.AddExplosionForce(1000, tr.position, 20f, 1200f);
+                col.gameObject.SendMessage("ZombieDie", SendMessageOptions.DontRequireReceiver);
+                col.gameObject.SendMessage("SkeletonDie", SendMessageOptions.DontRequireReceiver);
+                col.gameObject.SendMessage("MonsterDie", SendMessageOptions.DontRequireReceiver);
             }
         }
+        camshake.TurnOn();
     }
 }

@@ -81,6 +81,8 @@ public class SkeletonDamage : MonoBehaviour
     IEnumerator ObjectPoolPush()
     {
         yield return new WaitForSeconds(3f);
+                hpInit = maxHp;
+                hpBar.fillAmount = 1;
 
         isDie = false;
         rb.isKinematic = false;
@@ -98,8 +100,8 @@ public class SkeletonDamage : MonoBehaviour
         fireNormal = -fireNormal.normalized;
 
         Quaternion hitRot = Quaternion.LookRotation(fireNormal);
-             //LookRotation 함수는 벡터값을 받아서 회전으로 바꾸어 주는 기능을 가짐
-        var blood = Instantiate(bloodEffect, hitPos, hitRot); 
+        //LookRotation 함수는 벡터값을 받아서 회전으로 바꾸어 주는 기능을 가짐
+        var blood = Instantiate(bloodEffect, hitPos, hitRot);
         Destroy(blood, Random.Range(0.8f, 1.2f));
     }
     void Update()

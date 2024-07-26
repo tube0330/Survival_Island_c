@@ -24,7 +24,7 @@ public class ZombieDamage : MonoBehaviour
     public Text hpText;
     public int maxHp = 100;
     public int hpInit = 0;  //Init 초기값의 약자
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,17 +57,19 @@ public class ZombieDamage : MonoBehaviour
         {
             HitInfo(col);
             hpInit -= col.gameObject.GetComponent<BulletCtrl>().damage;
-            hpBar.fillAmount = (float)hpInit/(float)maxHp;
+            hpBar.fillAmount = (float)hpInit / (float)maxHp;
             hpText.text = $"HP : <color=#FF0000>{hpInit.ToString()}</color>"; //tostring 안해도 크게 문제는 없음.
             if (hpInit <= 0)
+            {
                 ZombieDie();
+            }
         }
     }
     private void HitInfo(Collision col)
     {
         //Destroy(col.gameObject);    //총알 제거
         col.gameObject.SetActive(false);    //총알 제거
-                                    //print("맞았나?");
+                                            //print("맞았나?");
         animator.SetTrigger(hitStr);
 
         //Vector3 hitPos = col.transform.position;          //기존 위치
@@ -75,7 +77,7 @@ public class ZombieDamage : MonoBehaviour
 
         //Quaternion hitRot = Quaternion.Euler(0, 90, 0);                                       //기존 방향
         //Quaternion hitRot = Quaternion.FromToRotation(-Vector3.forward, hitPos.normalized);    //기존 방향2
-                                                        //절대좌표
+        //절대좌표
         Quaternion hitRot = Quaternion.LookRotation(-(col.contacts[0].normal));                 //수정 방향
 
 
@@ -103,18 +105,21 @@ public class ZombieDamage : MonoBehaviour
         isDie = true;
         //Destroy(gameObject, 5.0f);
         GameManager.G_Instance.KillScore(1);
-    StartCoroutine(ObjectPoolPush());
+        StartCoroutine(ObjectPoolPush());
     }
 
     IEnumerator ObjectPoolPush()
     {
         yield return new WaitForSeconds(3f);
+        hpInit = maxHp;
+        hpBar.fillAmount = 1;
 
         isDie = false;
         rb.isKinematic = false;
         col.enabled = true;
         gameObject.tag = "ZOMBIE";
         gameObject.SetActive(false);
+        hpInit = maxHp;
     }
     void Update()
     {
