@@ -21,6 +21,7 @@ public class FpsDamage : MonoBehaviour
     void OnEnable()
     {
         GameManager.OnItemChange += UpdateSetUp;
+        HPText.text = $"HP <color=#FFAAAA>{curHP.ToString()}</color>";
     }
 
     void UpdateSetUp()

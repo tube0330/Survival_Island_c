@@ -5942,7 +5942,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'HP : <color=#FFAAAA>100</color>'
+  m_Text: 'HP : <color=#FFAAAA>110</color>'
 --- !u!222 &1341354072
 CanvasRenderer:
   m_ObjectHideFlags: 0
