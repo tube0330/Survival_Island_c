@@ -15,7 +15,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager G_Instance;
-    public Transform[] Points;
     public CanvasGroup canvasGroup;
     public Text killText;
     private float timePreV;
@@ -31,7 +30,6 @@ public class GameManager : MonoBehaviour
         //객체 생성. 게임매니저의 public이라고 선언된 변수나 메서드는 다른 스크립트에서 접근 가능
         //Points = GameObject.Find("SpawnPoints").GetComponentsInChildren<Transform>();
         canvasGroup = GameObject.Find("Inventory").GetComponent<CanvasGroup>();
-        Points = GameObject.Find("SpawnPoints").GetComponentsInChildren<Transform>();
     }
 
     void Update()

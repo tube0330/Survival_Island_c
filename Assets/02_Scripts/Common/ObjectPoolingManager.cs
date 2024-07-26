@@ -30,9 +30,9 @@ public class ObjectPoolingManager : MonoBehaviour
         enemyPrefabs[0] = Resources.Load<GameObject>("Monster"); // Assuming Enemy1 and Enemy2 are prefab names
         enemyPrefabs[1] = Resources.Load<GameObject>("Skeleton");
         enemyPrefabs[2] = Resources.Load<GameObject>("Zombie");
-
+        CreateEnemyGroup();
         CreateBullet();
-        CreateEnemy();
+        StartCoroutine(CreateEnemy());
     }
 
     private void Start()
@@ -64,22 +64,19 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < bulletPoolList.Count; i++)
         {
             if (bulletPoolList[i] != null && !bulletPoolList[i].activeSelf)
-            {
                 return bulletPoolList[i];
-            }
         }
         return null;
     }
 
-    void CreateEnemy()
+    void CreateEnemyGroup()
     {
         GameObject EnemyGroup = new GameObject("EnemyGroup");
         for (int i = 0; i < maxEnemyPool; i++)
         {
             var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], EnemyGroup.transform);
             enemy.name = $"enemy_{i + 1}";
-            enemy.SetActive(true);
-            //true로 갈길까
+            enemy.SetActive(false);
             enemyPoolList.Add(enemy);
         }
     }
@@ -94,6 +91,28 @@ public class ObjectPoolingManager : MonoBehaviour
             }
         }
         return null;
+    }
+     IEnumerator CreateEnemy()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3f);    //3초 간격으로 CreateEnemy 호출
+
+            //if (GameManager.G_Instance.isGameOver) yield break; //게임이 종료되면 코루틴을 종료해서 다음 루틴 진행하지 않음
+
+            foreach (GameObject _enemy in enemyPoolList)
+            {
+                if (_enemy.activeSelf == false)
+                {
+                    int idx = Random.Range(0, SpawnPointList.Count-1);
+                    _enemy.transform.position = SpawnPointList[idx].position;
+                    _enemy.transform.rotation = SpawnPointList[idx].rotation;
+                    _enemy.gameObject.SetActive(true);
+                    break;
+                }
+
+            }
+        }
     }
 
 }
