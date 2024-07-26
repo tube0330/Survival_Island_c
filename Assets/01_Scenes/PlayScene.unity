@@ -2563,11 +2563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   C_item:
-    itemtype: 0
-    itemcal: 0
-    name: 
-    detail: 
-    value: 0
+    itemtype: 3
+    itemcal: 1
+    name: "\u2191DAMAGE"
+    detail: "\u21915%"
+    value: 0.05
 --- !u!1 &688688989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,11 +3318,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   C_item:
-    itemtype: 0
+    itemtype: 2
     itemcal: 0
-    name: 
-    detail: 
-    value: 0
+    name: "\u2191GRENADE"
+    detail: "\u21912"
+    value: 2
 --- !u!1 &780230736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5470,11 +5470,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   C_item:
-    itemtype: 0
-    itemcal: 0
-    name: 
-    detail: 
-    value: 0
+    itemtype: 1
+    itemcal: 1
+    name: "\u2191SPEED"
+    detail: "\u219110%"
+    value: 0.1
 --- !u!1 &1276624665
 GameObject:
   m_ObjectHideFlags: 0
@@ -7241,9 +7241,9 @@ MonoBehaviour:
   C_item:
     itemtype: 0
     itemcal: 0
-    name: 
-    detail: 
-    value: 0
+    name: "\u2191HP"
+    detail: "\u219110HP"
+    value: 10
 --- !u!1001 &1916529546
 PrefabInstance:
   m_ObjectHideFlags: 0

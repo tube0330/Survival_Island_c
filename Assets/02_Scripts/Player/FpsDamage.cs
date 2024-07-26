@@ -20,9 +20,7 @@ public class FpsDamage : MonoBehaviour
 
     void OnEnable()
     {
-        curHP = initHP;
         GameManager.OnItemChange += UpdateSetUp;
-        HPText.text = $"HP: <color=#FFAAAA>{curHP.ToString()}</color>";
     }
 
     void UpdateSetUp()
@@ -54,7 +52,6 @@ public class FpsDamage : MonoBehaviour
     private void HP_Info()
     {
         curHP -= 1;
-        curHP = Mathf.Clamp(curHP, 0, initHP);     //hp가 0보다 작으면 0, maxHp보다 크면 maxHp로 제한
         HPBar.fillAmount = (float)curHP / (float)initHP;
 
         if (HPBar.fillAmount <= 0.3f)
@@ -66,7 +63,7 @@ public class FpsDamage : MonoBehaviour
         else if (HPBar.fillAmount <= 1f)
             HPBar.color = Color.green;
 
-        HPText.text = $"HP: <color=#FFAAAA>{curHP.ToString()}</color>";
+        HPText.text = $"HP <color=#FFAAAA>{curHP.ToString()}</color>";
     }
 
     public void PlayerDie()

@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
 
             case Item.ITEMTYPE.DAMAGE:
                 if (item.itemcal == Item.ITEMCAL.VALUE)
-                    gameData.damage -= item.value;  //더하는 방식
+                    gameData.damage -= item.value;
 
                 else
                     gameData.damage = gameData.damage / (1.0f + item.value);
