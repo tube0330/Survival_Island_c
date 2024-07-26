@@ -30,7 +30,7 @@ public class ObjectPoolingManager : MonoBehaviour
         enemyPrefabs[0] = Resources.Load<GameObject>("Monster"); // Assuming Enemy1 and Enemy2 are prefab names
         enemyPrefabs[1] = Resources.Load<GameObject>("Skeleton");
         enemyPrefabs[2] = Resources.Load<GameObject>("Zombie");
-        CreateEnemyGroup();
+        CreateEnemyPool();
         CreateBullet();
         StartCoroutine(CreateEnemy());
     }
@@ -69,7 +69,7 @@ public class ObjectPoolingManager : MonoBehaviour
         return null;
     }
 
-    void CreateEnemyGroup()
+    void CreateEnemyPool()
     {
         GameObject EnemyGroup = new GameObject("EnemyGroup");
         for (int i = 0; i < maxEnemyPool; i++)
@@ -92,7 +92,8 @@ public class ObjectPoolingManager : MonoBehaviour
         }
         return null;
     }
-     IEnumerator CreateEnemy()
+
+    IEnumerator CreateEnemy()
     {
         while (true)
         {
@@ -100,14 +101,14 @@ public class ObjectPoolingManager : MonoBehaviour
 
             //if (GameManager.G_Instance.isGameOver) yield break; //게임이 종료되면 코루틴을 종료해서 다음 루틴 진행하지 않음
 
-            foreach (GameObject _enemy in enemyPoolList)
+            foreach (GameObject ene in enemyPoolList)
             {
-                if (_enemy.activeSelf == false)
+                if (ene.activeSelf == false)
                 {
-                    int idx = Random.Range(0, SpawnPointList.Count-1);
-                    _enemy.transform.position = SpawnPointList[idx].position;
-                    _enemy.transform.rotation = SpawnPointList[idx].rotation;
-                    _enemy.gameObject.SetActive(true);
+                    int idx = Random.Range(0, SpawnPointList.Count - 1);
+                    ene.transform.position = SpawnPointList[idx].position;
+                    ene.transform.rotation = SpawnPointList[idx].rotation;
+                    ene.gameObject.SetActive(true);
                     break;
                 }
 
