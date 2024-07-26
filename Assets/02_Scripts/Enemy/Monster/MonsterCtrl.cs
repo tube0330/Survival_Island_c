@@ -11,7 +11,7 @@ public class MonsterCtrl : MonoBehaviour
     public NavMeshAgent agent2;
     public Transform Player;
     public Transform thisMonster;
-    public Animator animator;
+    public Animator ani;
     public MonsterDamage damage;
     [Header("Vars")]
     public float attackDist = 3.0f;
@@ -22,7 +22,7 @@ public class MonsterCtrl : MonoBehaviour
         agent2 = this.gameObject.GetComponent<NavMeshAgent>();
         thisMonster = transform;
         Player = GameObject.FindWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        ani = GetComponent<Animator>();
         damage = GetComponent<MonsterDamage>();
     }
 
@@ -36,7 +36,7 @@ public class MonsterCtrl : MonoBehaviour
         if (distance <= attackDist)
         {
             //Debug.Log("공격");
-            animator.SetBool("IsAttack", true);
+            ani.SetBool("IsAttack", true);
             agent2.isStopped = true;
             Vector3 PlayerPos = Player.position - transform.position;
             PlayerPos = PlayerPos.normalized;
@@ -46,20 +46,31 @@ public class MonsterCtrl : MonoBehaviour
         else if (distance <= traceDist)
         {
             //Debug.Log("추적");
-            animator.SetBool("IsAttack", false);
-            animator.SetBool("IsTrace", true);
+            ani.SetBool("IsAttack", false);
+            ani.SetBool("IsTrace", true);
             agent2.isStopped = false;
             agent2.destination = Player.position;
         }
         else
         {
             //Debug.Log("추적하지 않음");
-            animator.SetBool("IsTrace", false);
+            ani.SetBool("IsTrace", false);
             agent2.isStopped = true;
         }
     }
-    public void PlayerDeath()
+    // public void PlayerDeath()
+    // {
+    //     GetComponent<Animator>().SetTrigger("PlayerDie");
+    // }
+
+    void OnPlayerDie()
     {
-        GetComponent<Animator>().SetTrigger("PlayerDie");
+        StopAllCoroutines();    //모든 코루틴 종료
+        ani.SetTrigger("PlayerDie");
+    }
+
+    private void OnEnable() //오브젝트가 활성화될 때마다 호출
+    {
+        FpsDamage.OnPlayerDie += OnPlayerDie;  //damage class의 delegate. 이벤트 연결
     }
 }

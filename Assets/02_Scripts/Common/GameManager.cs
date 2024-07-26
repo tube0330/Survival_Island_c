@@ -192,14 +192,15 @@ public class GameManager : MonoBehaviour
 
     public void GamePause()
     {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0.0f : 1.0f;
 
         var playerObj = GameObject.FindGameObjectWithTag("Player");
         var scripts = playerObj.GetComponents<MonoBehaviour>();
 
         if (!isOpened)
         {
+            isPaused = !isPaused;
+            Time.timeScale = isPaused ? 0.0f : 1.0f;
+
             foreach (var script in scripts)
                 script.enabled = !isPaused;
         }
@@ -214,25 +215,23 @@ public class GameManager : MonoBehaviour
 
     public void InventoryOnOff()
     {
-        isOpened = !isOpened;
-        InventoryUpdate();
+        if (!isPaused)
+        {
+            isOpened = !isOpened;
+            InventoryUpdate();
+        }
     }
 
     public void InventoryUpdate()
     {
         var playerObj = GameObject.FindGameObjectWithTag("Player");
-        var scripts = playerObj.GetComponents<MonoBehaviour>();         // Player에게 있는 모든 스크립트들을 Get.
+        var scripts = playerObj.GetComponents<MonoBehaviour>();
 
         foreach (var script in scripts)
             script.enabled = !isOpened;
 
-        if (Cursor.lockState == CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.None;
-
-        else
-            Cursor.lockState = CursorLockMode.Locked;
-
-        Cursor.visible = !Cursor.visible ? true : false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         canvasGroup.alpha = isOpened ? 1.0f : 0.0f;
         canvasGroup.interactable = isOpened ? true : false;

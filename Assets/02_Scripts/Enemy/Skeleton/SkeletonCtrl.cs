@@ -11,7 +11,7 @@ public class SkeletonCtrl : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public Transform thisSkeleton;
-    public Animator animator;
+    public Animator ani;
     public SkeletonDamage damage;
     public AudioSource audioSource;
     public AudioClip swordclip;
@@ -25,17 +25,7 @@ public class SkeletonCtrl : MonoBehaviour
         agent = this.gameObject.GetComponent<NavMeshAgent>();
         thisSkeleton = transform;
         player = GameObject.FindWithTag(findTag).transform;
-        animator = GetComponent<Animator>();
-        damage = GetComponent<SkeletonDamage>();
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    void OnEnable()
-    {
-        agent = this.gameObject.GetComponent<NavMeshAgent>();
-        thisSkeleton = transform;
-        player = GameObject.FindWithTag(findTag).transform;
-        animator = GetComponent<Animator>();
+        ani = GetComponent<Animator>();
         damage = GetComponent<SkeletonDamage>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -47,7 +37,7 @@ public class SkeletonCtrl : MonoBehaviour
         float distance = Vector3.Distance(thisSkeleton.position, player.position);
         if (distance <= attackDist)
         {
-            animator.SetBool("IsAttack", true);
+            ani.SetBool("IsAttack", true);
             agent.isStopped = true;
 
             Vector3 playerPos = (player.position - transform.position).normalized;
@@ -56,14 +46,14 @@ public class SkeletonCtrl : MonoBehaviour
         }
         else if (distance <= traceDist)
         {
-            animator.SetBool("IsAttack", false);
-            animator.SetBool("IsTrace", true);
+            ani.SetBool("IsAttack", false);
+            ani.SetBool("IsTrace", true);
             agent.isStopped = false;
             agent.destination = player.position;
         }
         else
         {
-            animator.SetBool("IsTrace", false);
+            ani.SetBool("IsTrace", false);
             agent.isStopped = true;
         }
         
@@ -73,8 +63,19 @@ public class SkeletonCtrl : MonoBehaviour
         audioSource.clip = swordclip;   //사운드 클립을 받아서 아래에서 1회 재생
         audioSource.PlayDelayed(0.1f);  //0.1초 딜레이 후 재생
     }
-    public void PlayerDeath()
+    // public void PlayerDeath()
+    // {
+    //     GetComponent<Animator>().SetTrigger("PlayerDie");
+    // }
+
+    void OnPlayerDie()
     {
-        GetComponent<Animator>().SetTrigger("PlayerDie");
+        StopAllCoroutines();    //모든 코루틴 종료
+        ani.SetTrigger("PlayerDie");
+    }    
+
+    void OnEnable()
+    {
+        FpsDamage.OnPlayerDie += OnPlayerDie;  //damage class의 delegate. 이벤트 연결
     }
 }
