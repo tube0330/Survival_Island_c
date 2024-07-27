@@ -20,6 +20,7 @@ public class FpsDamage : MonoBehaviour
 
     void OnEnable()
     {
+        curHP = initHP;
         GameManager.OnItemChange += UpdateSetUp;
         HPText.text = $"HP <color=#FFAAAA>{curHP.ToString()}</color>";
     }
@@ -36,7 +37,6 @@ public class FpsDamage : MonoBehaviour
         initHP = (int)GameManager.G_Instance.gameData.HP;
         curHP = initHP;
         ScreenImage = GameObject.Find("Canvas_UI").transform.GetChild(5).gameObject;
-        curHP = initHP;
         HPBar.color = Color.green;
     }
 

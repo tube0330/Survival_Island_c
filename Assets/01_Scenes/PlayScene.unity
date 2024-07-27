@@ -6586,7 +6586,7 @@ MonoBehaviour:
   gameData:
     equipItem: []
     killcnt: 0
-    HP: 120
+    HP: 100
     damage: 25
     speed: 6
   slotList: {fileID: 1218319317}
@@ -8133,9 +8133,9 @@ SceneRoots:
   - {fileID: 1116869038}
   - {fileID: 1939002963}
   - {fileID: 1135198968}
-  - {fileID: 1019672045}
   - {fileID: 121756251}
   - {fileID: 1738853688}
   - {fileID: 1276624669}
   - {fileID: 444093775}
   - {fileID: 1847866066}
+  - {fileID: 1019672045}

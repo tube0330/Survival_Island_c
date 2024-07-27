@@ -9,7 +9,7 @@ namespace DataInfo
     {
         public List<Item> equipItem = new List<Item>();
         public int killcnt = 0;
-        public float HP = 120f;
+        public float HP = 100f;
         public float damage = 25;
         public float speed = 6.0f;
     }
