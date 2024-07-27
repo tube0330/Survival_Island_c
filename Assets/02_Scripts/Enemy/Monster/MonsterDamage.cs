@@ -91,6 +91,8 @@ public class MonsterDamage : MonoBehaviour
         rb.isKinematic = true;
         isDie = true;
         //Destroy(gameObject, 5.0f);
+        hpBar.fillAmount = 0f;
+        hpText.text = $"HP : <color=#FF0000>0</color>";
         GameManager.G_Instance.KillScore(1); StartCoroutine(ObjectPoolPush());
     }
 

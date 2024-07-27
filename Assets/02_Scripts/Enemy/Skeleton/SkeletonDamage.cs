@@ -75,6 +75,8 @@ public class SkeletonDamage : MonoBehaviour
         rb.isKinematic = true;
         isDie = true;
         //Destroy(gameObject, 5.0f);
+        hpBar.fillAmount = 0f;
+        hpText.text = $"HP : <color=#FF0000>0</color>";
         StartCoroutine(ObjectPoolPush());
         GameManager.G_Instance.KillScore(1);
     }
