@@ -7,7 +7,7 @@ public class MFOV : MonoBehaviour
     [Range(0, 360)] public float viewAngle = 120f;
     [SerializeField] Transform tr;
     [SerializeField] Transform playertr;
-    public float viewRange = 15;
+    public float viewRange = 3f;
 
     [SerializeField] int playerLayer;
     [SerializeField] int barrelLayer;
