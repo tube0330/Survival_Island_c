@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class SkeletonCtrl : MonoBehaviour
 {
+    SFOV C_sfov;
     [Header("Component")]
     public NavMeshAgent agent;
     public Transform player;
@@ -22,6 +23,7 @@ public class SkeletonCtrl : MonoBehaviour
 
     void Start()
     {
+        C_sfov = GetComponent<SFOV>();
         agent = this.gameObject.GetComponent<NavMeshAgent>();
         thisSkeleton = transform;
         player = GameObject.FindWithTag(findTag).transform;
@@ -37,14 +39,26 @@ public class SkeletonCtrl : MonoBehaviour
         float distance = Vector3.Distance(thisSkeleton.position, player.position);
         if (distance <= attackDist)
         {
-            ani.SetBool("IsAttack", true);
-            agent.isStopped = true;
+            if (C_sfov.isViewPlayer())
+            {
+                ani.SetBool("IsAttack", true);
+                agent.isStopped = true;
 
-            Vector3 playerPos = (player.position - transform.position).normalized;
-            Quaternion rot = Quaternion.LookRotation(playerPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3.0f);
+                Vector3 playerPos = (player.position - transform.position).normalized;
+                Quaternion rot = Quaternion.LookRotation(playerPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3.0f);
+            }
+
+            else
+            {
+                ani.SetBool("IsAttack", false);
+                ani.SetBool("IsTrace", true);
+                agent.isStopped = false;
+                agent.destination = player.position;
+            }
+
         }
-        else if (distance <= traceDist)
+        else if (C_sfov.isTracePlayer())
         {
             ani.SetBool("IsAttack", false);
             ani.SetBool("IsTrace", true);
@@ -56,7 +70,7 @@ public class SkeletonCtrl : MonoBehaviour
             ani.SetBool("IsTrace", false);
             agent.isStopped = true;
         }
-        
+
     }
     public void SwordSfx()
     {
@@ -72,7 +86,7 @@ public class SkeletonCtrl : MonoBehaviour
     {
         StopAllCoroutines();    //모든 코루틴 종료
         ani.SetTrigger("PlayerDie");
-    }    
+    }
 
     void OnEnable()
     {

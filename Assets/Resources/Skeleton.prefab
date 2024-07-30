@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3306511723821842138}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.17, z: 1.66}
-  m_LocalScale: {x: 2.25, y: 1.5, z: 1.6127857}
+  m_LocalPosition: {x: 0, y: 1.17, z: 1.1292}
+  m_LocalScale: {x: 2.25, y: 1.5, z: 0.55125016}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4693411413229010837}
@@ -2045,6 +2045,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100078, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6305737302658464441}
+    - targetCorrespondingSourceObject: {fileID: 100078, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6094498628470471406}
   m_SourcePrefab: {fileID: 100100000, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}
 --- !u!1 &4693411413228577717 stripped
 GameObject:
@@ -2066,7 +2069,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   player: {fileID: 0}
   thisSkeleton: {fileID: 0}
-  animator: {fileID: 0}
+  ani: {fileID: 0}
   damage: {fileID: 0}
   audioSource: {fileID: 0}
   swordclip: {fileID: 8300000, guid: 7dfba132a836245348115b63f7f62cc8, type: 3}
@@ -2158,7 +2161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  capCol: {fileID: 0}
+  col: {fileID: 0}
   animator: {fileID: 0}
   bloodEffect: {fileID: 1240250018707908, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
   boxCol: {fileID: 7379885176505208870}
@@ -2167,7 +2170,7 @@ MonoBehaviour:
   bulletTag: BULLET
   hitStr: HitTrigger
   dieStr: DieTrigger
-  IsDie: 0
+  isDie: 0
   hpBar: {fileID: 4644550197684757730}
   hpText: {fileID: 7560833805521860409}
   maxHp: 100
@@ -2268,6 +2271,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6094498628470471406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693411413228577717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e829b5921db934478bc57d2a543c4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewAngle: 120
+  tr: {fileID: 0}
+  playertr: {fileID: 0}
+  viewRange: 15
+  playerLayer: 0
+  barrelLayer: 0
+  layerMask: 0
 --- !u!4 &4693411413229010837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400078, guid: 5a35c5f0a89b9654d897ccd7c8f81bd0, type: 3}

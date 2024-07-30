@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MonsterCtrl : MonoBehaviour
 {
+    MFOV C_FOV;
     [Header("Component")]
     public NavMeshAgent agent2;
     public Transform Player;
@@ -19,6 +20,7 @@ public class MonsterCtrl : MonoBehaviour
 
     void Start()
     {
+        C_FOV = GetComponent<MFOV>();
         agent2 = this.gameObject.GetComponent<NavMeshAgent>();
         thisMonster = transform;
         Player = GameObject.FindWithTag("Player").transform;
@@ -32,18 +34,29 @@ public class MonsterCtrl : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(thisMonster.position, Player.position);
-        
+
         if (distance <= attackDist)
         {
-            //Debug.Log("공격");
-            ani.SetBool("IsAttack", true);
-            agent2.isStopped = true;
-            Vector3 PlayerPos = Player.position - transform.position;
-            PlayerPos = PlayerPos.normalized;
-            Quaternion rot = Quaternion.LookRotation(PlayerPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3.0f);
+            if (C_FOV.isViewPlayer())
+            {
+                //Debug.Log("공격");
+                ani.SetBool("IsAttack", true);
+                agent2.isStopped = true;
+                Vector3 PlayerPos = Player.position - transform.position;
+                PlayerPos = PlayerPos.normalized;
+                Quaternion rot = Quaternion.LookRotation(PlayerPos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 3.0f);
+            }
+
+            else
+            {
+                ani.SetBool("IsAttack", false);
+                ani.SetBool("IsTrace", true);
+                agent2.isStopped = false;
+                agent2.destination = Player.position;
+            }
         }
-        else if (distance <= traceDist)
+        else if (C_FOV.isTracePlayer())
         {
             //Debug.Log("추적");
             ani.SetBool("IsAttack", false);
@@ -52,7 +65,7 @@ public class MonsterCtrl : MonoBehaviour
             agent2.destination = Player.position;
         }
         else
-        {
+        {   
             //Debug.Log("추적하지 않음");
             ani.SetBool("IsTrace", false);
             agent2.isStopped = true;

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class ZombieCtrl : MonoBehaviour
 {
+    ZFOV C_zfov;
     //Attribute : 속성
     [Header("Component")]
     public NavMeshAgent agent;          //네비게이션 [추적할 대상을 찾는 네비 컴포넌]
@@ -19,6 +20,7 @@ public class ZombieCtrl : MonoBehaviour
 
     void Start()
     {
+        C_zfov = GetComponent<ZFOV>();
         //유니티엔진 없이 C#으로는 아래처럼 할당을 해줌
         //agent = new NavMeshAgent();
         //  자기자신 옵젝 안에 있는        NavMeshAgent 컴포넌을 대입
@@ -43,15 +45,27 @@ public class ZombieCtrl : MonoBehaviour
         float distance = Vector3.Distance(thisZombie.position, Player.position);
         if (distance <= attackDist)
         {
+            if (C_zfov.isViewPlayer())
             //Debug.Log("공격");
-            ani.SetBool("IsAttack", true);
-            agent.isStopped = true;
-            Quaternion rot = Quaternion.LookRotation(Player.position - thisZombie.position);
-            thisZombie.rotation = Quaternion.Slerp(thisZombie.rotation, rot, Time.deltaTime * 3.0f);
+            {
+                ani.SetBool("IsAttack", true);
+                agent.isStopped = true;
+                Quaternion rot = Quaternion.LookRotation(Player.position - thisZombie.position);
+                thisZombie.rotation = Quaternion.Slerp(thisZombie.rotation, rot, Time.deltaTime * 3.0f);
+            }
             //Slerp 부드럽게 곡면(원형방향으로) 보간하는 함수
             //Quaternion.Slerp(자기자신 로테이션에서, 플레이어 방향으로, 주어진시간만큼)
+
+            else
+            {
+                //Debug.Log("추적");
+                ani.SetBool("IsTrace", true);
+                ani.SetBool("IsAttack", false);
+                agent.isStopped = false;
+                agent.destination = Player.position;    //추적 대상은 플레이어 위치
+            }
         }
-        else if (distance <= traceDist)
+        else if (C_zfov.isTracePlayer())
         {
             //Debug.Log("추적");
             ani.SetBool("IsTrace", true);

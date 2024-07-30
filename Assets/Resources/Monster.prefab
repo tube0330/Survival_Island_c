@@ -809,6 +809,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100064, guid: e4795bb6d52d57c44aee824a4ff99926, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2534542978708547139}
+    - targetCorrespondingSourceObject: {fileID: 100064, guid: e4795bb6d52d57c44aee824a4ff99926, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6726696062906075744}
   m_SourcePrefab: {fileID: 100100000, guid: e4795bb6d52d57c44aee824a4ff99926, type: 3}
 --- !u!4 &6141335779995114393 stripped
 Transform:
@@ -835,7 +838,7 @@ MonoBehaviour:
   agent2: {fileID: 0}
   Player: {fileID: 0}
   thisMonster: {fileID: 0}
-  animator: {fileID: 0}
+  ani: {fileID: 0}
   damage: {fileID: 0}
   attackDist: 3
   traceDist: 20
@@ -924,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  capCol: {fileID: 0}
+  col: {fileID: 0}
   animator: {fileID: 0}
   bloodEffect: {fileID: 1240250018707908, guid: 72dc7c6e9068b6f42b1555dfc96cef85, type: 3}
   boxCol: {fileID: 6345020322615905155}
@@ -933,7 +936,7 @@ MonoBehaviour:
   bulletTag: BULLET
   hitStr: HitTrigger
   dieStr: DieTrigger
-  IsDie: 0
+  isDie: 0
   hpBar: {fileID: 569357282743195711}
   hpText: {fileID: 650725407334480506}
   maxHp: 100
@@ -1034,3 +1037,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6726696062906075744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141335779995469753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128ef70a2c9cf5343b229abdc98cae2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewAngle: 120
+  tr: {fileID: 0}
+  playertr: {fileID: 0}
+  viewRange: 15
+  playerLayer: 0
+  barrelLayer: 0
+  layerMask: 0
