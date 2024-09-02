@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DataInfo;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -138,6 +139,10 @@ public class GameManager : MonoBehaviour
         }
 
         OnItemChange();
+
+        // #if UNITY_EDITOR
+        //     EditorApplication.isPlaying = true;
+        // #else 
     }
 
     public void RemoveItem(Item item)
