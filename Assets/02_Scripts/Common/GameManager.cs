@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject slotList;
     public GameObject[] itemObjects;
 
+    [SerializeField] RawImage minimap;
+    [SerializeField] GameObject panel;
+
     void Awake()
     {
         if (G_Instance == null)
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         canvasGroup = GameObject.Find("Inventory").GetComponent<CanvasGroup>();
+        minimap = GameObject.Find("Canvas_UI").transform.GetChild(9).GetComponent<RawImage>();
     }
 
     void LoadGameData()
@@ -191,6 +195,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
             InventoryOnOff();
+
+        StartCoroutine(MapClikcer());
+    }
+    IEnumerator MapClikcer()
+    {
+        yield return new WaitForSeconds(3f);
     }
 
     public bool isPaused = false;
